@@ -35,6 +35,35 @@ def cantor(currency, amount):
     return message
 
 
+@app.route("/exchange")
+def exchange():
+    body = f'''
+    <form id="exchange_form" action="/exchange_process" method="POST">
+        <label for="currency">Currency</label>
+        <input type="text" id="currency" name="currency" value="EUR"><br>
+        <label for="currency">Amount</label>
+        <input type="text" id="amount" name="amount" value="100"><br>
+        <input type="submit" value="Send">
+    </form>
+    '''
+    return body
+    # body = f"You want to exchange {amount} {currency}"
+
+
+@app.route('/exchange_process', methods=['POST'])
+def exchange_process():
+    currency = 'EUR'
+    if 'currency' in request.form:
+        currency = request.form['currency']
+
+    amount = 100
+    if 'amount' in request.form:
+        amount = request.form['amount']
+
+    body = f"You want to exchange {amount} {currency}"
+    return body
+
+
 if __name__ == '__main__':
     app.run(debug=True)
     # app.run(debug=True, port=8080)  # moæna zmienić port
