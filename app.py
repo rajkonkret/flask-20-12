@@ -42,7 +42,7 @@ def exchange():
         <form id="exchange_form" action="/exchange" method="POST">
             <label for="currency">Currency</label>
             <input type="text" id="currency" name="currency" value="EUR"><br>
-            <label for="currency">Amount</label>
+            <label for="amount">Amount</label>
             <input type="text" id="amount" name="amount" value="100"><br>
             <input type="submit" value="Send">
         </form>
