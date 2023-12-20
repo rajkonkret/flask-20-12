@@ -1,24 +1,30 @@
-from flask import Flask, request, url_for
+from flask import Flask, request, url_for, redirect
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    print(request.query_string)
+    # print(request.query_string)
+    #
+    # for p in request.args:
+    #     print(p, request.args[p])
+    #
+    # color = 'black'
+    # if 'color' in request.args:
+    #     color = request.args['color']
+    #
+    # style = 'normal'
+    # if 'style' in request.args:
+    #     style = request.args['style']
+    #
+    # return f'<h1 style="color: {color};font-style: {style}">Hallo World!!!</h1>'
 
-    for p in request.args:
-        print(p, request.args[p])
-
-    color = 'black'
-    if 'color' in request.args:
-        color = request.args['color']
-
-    style = 'normal'
-    if 'style' in request.args:
-        style = request.args['style']
-
-    return f'<h1 style="color: {color};font-style: {style}">Hallo World!!!</h1>'
+    menu = f'''
+    Go <a href=" {url_for("exchange")}">here</a> to exchange money<br>
+    To exchange 50 CHF go <a href="{url_for('cantor', currency='CHF', amount='50')}">here</a><br>
+    '''
+    return f'<h1>Hallo World!!!</h1><br>{menu}'
 
 
 @app.route("/about")
@@ -60,7 +66,8 @@ def exchange():
             amount = request.form['amount']
 
         body = f"You want to exchange {amount} {currency}"
-        return body
+        # return redirect(url_for('index'))
+        return redirect(url_for('cantor', currency=currency, amount=amount))
 
 
 @app.route('/exchange_process', methods=['POST'])
