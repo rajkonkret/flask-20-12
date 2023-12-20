@@ -68,6 +68,7 @@ def exchange():
         body = f"You want to exchange {amount} {currency}"
         # return redirect(url_for('index'))
         return redirect(url_for('cantor', currency=currency, amount=amount))
+        # przekierowanie na inny endpoint
 
 
 @app.route('/exchange_process', methods=['POST'])
